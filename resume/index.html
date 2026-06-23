@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Park, Sang-wha</title>
+	
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/xpressengine/xeicon@2.3.3/xeicon.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700|Ubuntu:300i,400,500,700&display=swap" rel="stylesheet">
+	
+<style type="text/css">
+	body {margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif;}
+	#bg {position: fixed; top: 0; width: 100vw; height: 50vh; background: url(../img/resume_bg.jpg) no-repeat; background-size: cover; background-position: center; z-index: -10;}
+	ul {margin: 0; padding: 0}
+	ul:after {display: block; content: ""; clear: both;}
+	li {list-style: none;}
+	section {width: 100%; max-width: 800px; margin: 0 auto 100px;}
+	#header {position: relative; width: 100%; height: 250px; text-align: center;}
+	#header h1 {margin: 0;  padding: 50px 0 0; font-family: 'Ubuntu', sans-serif; font-size: 40px; line-height: 50px; color: #FFF; text-shadow: 0 1px 3px #000;}
+	#header .photo {position: absolute; display: block; left: 50%; bottom: 0; width: 200px; height: auto; margin-left: -100px; margin-bottom: -100px; border-radius: 50%;}
+	#contents {padding: 150px 0; background: #FFF; color: #666;}
+	#contents h2 {margin: 0 0 50px; font-family: 'Ubuntu', sans-serif; font-size: 30px; line-height: 40px; color: #6374b8; text-align: center;}
+	#contents>ul {margin: 0 0 100px; padding: 0; text-align: center;}
+	#contents>ul>li {display: inline-block; margin: 0 10px; font-size: 16px; line-height: 20px;  font-weight: 400;}
+	#contents h3 {margin: 0 0 50px; font-family: 'Ubuntu', sans-serif; font-size: 30px; line-height: 40px; color: rgba(100,100,240,.5); text-align: center; text-transform: uppercase;}
+	#contents section>ul>li {position: relative; font-size: 16px; line-height: 20px; text-align: center;}
+	#contents section>ul>li:before,
+	#contents section>ul>li:after {display: block; content: ""; position: absolute; top: 0; left: 50%;}
+	#contents section>ul>li:before {width: 10px; height: 10px; margin-left: -10px; border: solid 5px #EEE; border-radius: 50%;}
+	#contents section>ul>li:after {width: 1px; height: 30px; margin-top: 20px; background: #EEE;}
+	#contents section p {margin: 0 0 10px; font-family: 'Ubuntu', sans-serif; color: #CCC; font-size: 20px; line-height: 20px; font-weight: bold;}
+	#contents section h4 {margin: 0 0 10px; font-size: 24px; line-height: 30px;}
+	#contents section span {display: block; margin-top: 10px;}
+	#contents section.education li,
+	#contents section.career li {margin-bottom: 30px; padding: 60px 0 0;}
+	#contents section.skill ul {margin: 20px 0 50px; padding: 30px 0; border: solid #EEE; border-width: 1px 0; text-align: center;}
+	#contents section.skill li {display: inline-block; min-width: 80px; margin: 0 10px;}
+	#contents section.skill li:before,
+	#contents section.skill li:after {display: none;}
+	#contents section.skill p {color: #666; text-align: center;}
+	#contents section.skill img {display: block; max-height: 42px; margin: 0 auto 10px;}
+	#contents section.skill i {display: block; margin: 0 auto 10px; font-size: 42px; line-height: 42px;}
+	#btn {position: fixed; bottom: 100px; right: 5%;}
+	#btn li {}
+	#btn li:nth-child(1) a:hover {background: #26cc3e}
+	#btn li:nth-child(2) a:hover {background: #cc2626}
+	#btn li:nth-child(3) a:hover {background: #f9e000; color: #3b1e1e;}
+	#btn li:nth-child(4) a:hover {background: #35ace1;}
+	#btn a {display: block; width: 50px; height: 50px; margin: 10px; background: #CCC; border-radius: 50%; color: #FFF; text-align: center;}
+	#btn a i {font-size: 30px; line-height: 50px;}
+	
+	.xi-xpressengine {color: #526bbe;}
+	.xi-wordpress-official {color: #028cb0;}
+	.xi-naver-square {color: #00c73c;}
+	.xi-html5 {color: #e54d26;}
+	.xi-css3 {color: #0070ba;}
+	.xi-javascript {color: #f7df1e;}
+	
+	/*	모바일 */
+	@media all and (max-width: 799px) {
+		#bg {height: 50vw;}
+		#header {height: 50vw;}
+        #header h1 {padding: 10vw 0 0; font-size: 8vw; line-height: 10vw; }
+        #header .photo {width: 50vw; margin-left: -25vw; margin-bottom: -25vw;}
+		#contents {padding: 30vw 0 0;}
+		#contents h2 {margin: 5vw 0 10vw; font-size: 7vw; line-height: 8vw;}
+		#contents>ul {margin: 0 0 20vw;}
+		#contents>ul>li {display: block; margin: 0 0 5vw; font-size: 4vw; line-height: 5vw;}
+		#contents h3 {margin: 0 0 10vw; font-size: 7vw; line-height: 8vw;}
+		#contents section>ul>li {position: relative; font-size: 4vw; line-height: 5vw; text-align: center;}
+		#contents section>ul>li:before {width: 10px; height: 10px; margin-left: -10px; border: solid 5px #EEE; border-radius: 50%;}
+		#contents section>ul>li:after {width: 1px; height: 30px; margin-top: 20px; background: #EEE;}
+		#contents section p {font-size: 5vw; line-height: 5vw;}
+		#contents section h4 {font-size: 6vw; line-height: 7vw;}
+		#contents section.education li,
+		#contents section.career li {margin-bottom: 10vw;}
+		#contents section.skill ul {margin: 5vw 5% 10vw; padding: 5vw 0 0;}
+		#contents section.skill li {display: inline-block; width: 30%; margin: 0 0 5vw;}
+		#contents section.skill ul:nth-child(5) li {width: 45%;}
+		#contents section.skill img {display: block; max-height: 10vw; margin: 0 auto 10px;}
+		#contents section.skill i {display: block; margin: 0 auto 10px; font-size: 10vw; line-height: 10vw;}
+		#btn {position: relative; bottom: 0; right: 0; margin-bottom: 20vw;}
+		#btn ul {text-align: center;}
+		#btn li {display: inline-block}
+		#btn li:nth-child(1) a {background: #26cc3e}
+		#btn li:nth-child(2) a {background: #cc2626}
+		#btn li:nth-child(3) a {background: #f9e000; color: #3b1e1e;}
+		#btn li:nth-child(4) a {background: #35ace1;}
+		#btn a {width: 15vw; height: 15vw;}
+		#btn a i {font-size: 10vw; line-height: 15vw;}
+	}
+</style>
+</head>
+
+<body>
+	<div id="bg"></div>
+	<div id="header">
+		<h1>Park Sang-wha</h1>
+		<img class="photo" src="../img/profile.jpg" alt="박상화">
+	</div>
+	
+	<div id="contents">
+        <h2>"Web &amp; Graphic Designer"</h2>
+        <ul>
+            <li><i class="xi-home"></i> 서울시 관악구 신림동</li>
+            <li><i class="xi-mobile"></i> 010-3072-0096</li>
+            <li><i class="xi-mail-o"></i> s_o_j_u@naver.com</li>
+        </ul>
+
+        <section class="education">
+			<h3>education</h3>		
+			<ul>
+				<li>
+					<p>2004</p>
+					서울 용산고등학교 졸업
+				</li>
+				<li>
+					<p>2011</p>
+					경원대학교(現가천대학교) 의상학과 졸업
+				</li>
+			</ul>
+        </section>
+        <section class="career">
+			<h3>career</h3>			
+			<ul>
+				<li>
+					<p>2006.02 ~ 2006.10</p>
+					<h4>Edaily biz</h4>
+					프로그램 개발 보조 / 테스트 및 디버깅
+					<span>군 입대로 인하여 퇴사</span>
+				</li>
+<!--
+				<li>
+					<p>2006.10 ~ 2008.10</p>
+					<h4>대한민국 육군</h4>
+					현역입대
+					<span>병장 만기 전역</span>
+				</li>
+-->
+				<li>
+					<p>2009.07 ~ 2010.08</p>
+					<h4>(주)다원프라자</h4>
+					인쇄·편집디자인 / 전산관리 / CMS 상품DB관리
+					<span>대학 복학으로 인하여 퇴사</span>
+				</li>
+				<li>
+					<p>2014.04 ~ 2015.08</p>
+					<h4>주식회사 아트라이브</h4>
+					웹·그래픽 디자인 / 법인공동대표
+					<span>사업 분리로 인한 대표직 사퇴</span>
+				</li>
+				<li>
+					<p>2014.07 ~ 2014.09</p>
+					<h4>(주)다원프라자 / (주)비엠아이티</h4>
+					고객사 MRO 및 명함 온라인 발주 솔루션 개발
+					<span>프로젝트 참여</span>
+				</li>
+				<li>
+					<p>2018.09.14 ~ 2018.09.15</p>
+					<h4>Hycon Hacks</h4>
+					블록체인 기반 해커톤
+					<span>Team OpenSkills 디자인파트</span>
+				</li>
+				<li>
+					<p>2019.09 ~ 2021.05</p>
+					<h4>주식회사 제이블럭</h4>
+					웹·그래픽 디자인 / 자사 쇼핑몰 제작·관리 / 앱 기획
+					<span>디자인 팀장</span>
+				</li>
+				<li>
+					<p>2010.03 ~ 2021.07</p>
+					<h4>디자인웰시</h4>
+					웹·그래픽 디자인
+					<span>대표</span>
+				</li>
+				<li>
+					<p>2021.08 ~</p>
+					<h4>(주)다원프라자 / (주)인쇄향</h4>
+					웹·그래픽 디자인 / 인쇄·편집디자인 / 자사 쇼핑몰 제작·관리 <br>/ 전산관리 / CMS 기획·개발·상품DB관리
+					<span>대표</span>
+				</li>
+			</ul>
+		</section>
+		<section class="skill">
+			<h3>skills</h3>
+			<p><i class="xi-wrench"></i> TOOLS</p>
+			<ul>
+				<li>
+					<img src="https://www.adobe.com/content/dam/cc/us/en/creativecloud/max2020/mnemonics/photoshop.svg">
+					Photoshop
+				</li>
+				<li>
+					<img src="https://www.adobe.com/content/dam/cc/icons/illustrator.svg">
+					Illustrator
+				</li>
+				<li>
+					<img src="https://www.adobe.com/content/dam/cc/icons/indesign.svg">
+					Indesign
+				</li>
+				<li>
+					<img src="https://www.adobe-students.com/content/dam/shared/images/product-icons/svg/dreamweaver.svg">
+					Dreamweaver
+				</li>
+				<li>
+					<img src="https://www.adobe.com/content/dam/cc/icons/acrobat_reader_appicon_noshadow_256.svg">
+					Acrobat Pro
+				</li>
+				<li>
+					<img src="../img/CorelDRAW_Graphics.png">
+					CorelDRAW
+				</li>
+				<li>
+					<img src="../img/blender_icon_512x512.png">
+					blender
+				</li>
+				<li>
+					<img src="../img/blender_icon_512x512.png">
+					Figma
+				</li>
+			</ul>
+			
+			<p><i class="xi-chart-bar"></i> CMS</p>
+			<ul>
+				<li>
+					<i class="xi-xpressengine"></i>
+					XpressEngine
+				</li>
+				<li>
+					<i class="xi-wordpress-official"></i>
+					WordPress
+				</li>
+				<li>
+					<img src="https://img.cafe24.com/images/hosting2/main_css/h1_logo_cafe24.png">
+					카페24 쇼핑몰
+				</li>
+				<li>
+					<i class="xi-naver-square"></i>
+					네이버 스마트스토어
+				</li>
+			</ul>
+			<p><i class="xi-globus"></i> WEB</p>
+			<ul>
+				<li>
+					<i class="xi-html5"></i>
+					HTML
+				</li>
+				<li>
+					<i class="xi-css3"></i>
+					CSS
+				</li>
+				<li>
+					<i class="xi-javascript"></i>
+					JavaScript
+				</li>
+			</ul>
+		</section>
+	</div>
+	
+	<div id="btn">
+		<ul>
+			<li><a href="tel:+82-10-3072-0096"><i class="xi-call"></i></a></li>
+			<li><a href="mailto:s_o_j_u@naver.com"><i class="xi-mail"></i></a></li>
+			<li><a href="https://open.kakao.com/o/sjqkvmT"><i class="xi-kakaotalk"></i></a></li>
+			<li><a href="https://t.me/sojumeister"><i class="xi-telegram"></i></a></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/xpressengine/xeicon@2.3.3/xeicon.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700|Ubuntu:300i,400,500,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --nav-left: 24px;
+      --nav-gap: 12px;
+
+      --bullet-size: 10px;
+      --bullet-color: rgba(120,120,120,.35);
+      --bullet-active-color: rgba(99,116,184,.95);
+
+      --section-padding: 40px;
+      --maxw: 980px;
+
+      --fg: #222;
+      --muted: rgba(0,0,0,.55);
+      --bg: #ffffff;
+      --card: #ffffff;
+      --border: rgba(0,0,0,.10);
+      --accent: rgba(99,116,184,.95);
+    }
+
+    html, body{
+      height: 100%;
+      margin: 0;
+      font-family: "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+    }
+    body{ overflow: hidden; }
+
+    .snap-root{
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .snap-section{
+      height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+    }
+
+    .section-inner{
+      height: 100%;
+      overflow-y: auto;
+      box-sizing: border-box;
+      padding: var(--section-padding);
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 24px;
+    }
+
+    /* 불릿 네비게이션(클릭 가능하도록 보완) */
+    .bullet-nav{
+      position: fixed;
+      left: var(--nav-left);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999;
+      display: grid;
+      gap: var(--nav-gap);
+    }
+    .bullet-nav .bullet{
+      width: var(--bullet-size);
+      height: var(--bullet-size);
+      border-radius: 999px;
+      background: var(--bullet-color);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .bullet-nav .bullet:hover{
+      transform: scale(1.2);
+    }
+    .bullet-nav .bullet[aria-current="true"]{
+      background: var(--bullet-active-color);
+    }
+
+    /* 은은한 배경 그라데이션 */
+    .s-intro{ background: linear-gradient(180deg, rgba(99,116,184,.12), rgba(255,255,255,0)); }
+    .s2{ background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(255,255,255,0)); }
+    .s3{ background: linear-gradient(180deg, rgba(99,116,184,.04), rgba(255,255,255,0)); }
+    .s4{ background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(255,255,255,0)); }
+
+    /* 공통 컨텐츠 박스 스타일 */
+    .content-box{
+      width: 100%;
+      max-width: var(--maxw);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+      padding: 32px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 20px rgba(0,0,0,.02);
+    }
+
+    .section-title{
+      margin: 0 0 24px 0;
+      font-family: "Ubuntu", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      font-size: 24px;
+      color: var(--accent);
+      border-bottom: 2px solid rgba(99,116,184,.1);
+      padding-bottom: 8px;
+    }
+
+    /* INTRO */
+    .intro-inner{
+      display: grid;
+      place-items: center;
+      align-content: center;
+    }
+    .intro-typing{
+      display: inline-table;
+      width: 100%;
+      max-width: var(--maxw);
+      font-family: "Ubuntu", "Noto Sans KR", sans-serif;
+      font-size: clamp(28px, 5vw, 56px);
+      line-height: 1.4;
+      letter-spacing: .02em;
+      font-weight: 700;
+      white-space: pre-line;
+    }
+    .cursor{
+      display: inline-block;
+      width: 2px;
+      height: 0.92em;
+      margin-left: 6px;
+      background: currentColor;
+      vertical-align: -0.1em;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    /* CAREER: 타임라인 레이아웃 */
+    .timeline{
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid rgba(0,0,0,.08);
+    }
+    .timeline-item{
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-item:last-child{ margin-bottom: 0; }
+    .timeline-item::before{
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .timeline-date{
+      font-size: 14px;
+      color: var(--muted);
+      font-family: "Ubuntu", sans-serif;
+    }
+    .timeline-title{
+      font-size: 18px;
+      font-weight: 500;
+      margin: 4px 0;
+    }
+    .timeline-desc{
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* SKILLS: 태그 그리드 레이아웃 */
+    .skills-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .skill-category h3{
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      color: var(--fg);
+    }
+    .skill-tags{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag{
+      background: rgba(0,0,0,.04);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .tag:hover{
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* PORTFOLIO: 카드 레이아웃 */
+    .portfolio-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .portfolio-card{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--card);
+    }
+    .portfolio-card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .card-img{
+      height: 160px;
+      background: rgba(0,0,0,.03);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 24px;
+    }
+    .card-body{
+      padding: 16px;
+    }
+    .card-title{
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .card-text{
+      margin: 0 0 12px 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card-link{
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    @keyframes blink{
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 799px){
+      :root{ --section-padding: 24px; }
+      .bullet-nav{ left: 12px; }
+      .content-box{ padding: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="bullet-nav" aria-label="Section status">
+    <div class="bullet" data-index="0" aria-label="Intro"></div>
+    <div class="bullet" data-index="1" aria-label="Career"></div>
+    <div class="bullet" data-index="2" aria-label="Skills"></div>
+    <div class="bullet" data-index="3" aria-label="Portfolio"></div>
+  </nav>
+
+  <main class="snap-root" id="snapRoot">
+    <section class="snap-section s-intro" id="intro">
+      <div class="section-inner intro-inner">
+        <div class="intro-typing" aria-label="Intro typing">
+          <span id="typingText"></span><span class="cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="snap-section s2" id="section-2">
+      <div class="section-inner">
+        <div class="content-box">
+          <h2 class="section-title">career</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2024.03 - Present</div>
+              <div class="timeline-title">주요 회사 또는 프리랜서 활동명</div>
+              <p class="timeline-desc">UI/UX 설계 및 인쇄 매체 제작 총괄. 크로스 미디어 디자인 프로세스 도입 및 프로젝트 리드.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2022.01 - 2024.02</div>
+              <div class="timeline-title">이전 근무처 / 프로젝트 경험</div>
+              <p class="timeline-desc">브랜딩 디자인, 카탈로그 및 정기간행물 레이아웃 편집 기획, 웹 프론트엔드 퍼블리싱 협업.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="snap-section s3" id="section-3">
+      <div class="section-inner">
+        <div class="content-box">
+          <h2 class="section-title">skills</h2>
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h3>UI/UX & Web Design</h3>
+              <div class="skill-tags">
+                <span class="tag">Figma</span>
+                <span class="tag">Adobe XD</span>
+                <span class="tag">GUI Planning</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h3>Publishing & Print</h3>
+              <div class="skill-tags">
+                <span class="tag">InDesign</span>
+                <span class="tag">Illustrator</span>
+                <span class="tag">Photoshop</span>
+                <span class="tag">Data Merge</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h3>Development</h3>
+              <div class="skill-tags">
+                <span class="tag">HTML5 / CSS3</span>
+                <span class="tag">JavaScript (ES6+)</span>
+                <span class="tag">Git / GitHub</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="snap-section s4" id="section-4">
+      <div class="section-inner">
+        <div class="content-box">
+          <h2 class="section-title">portfolio</h2>
+          <div class="portfolio-grid">
+            <div class="portfolio-card">
+              <div class="card-img"><i class="xi-folder-open"></i></div>
+              <div class="card-body">
+                <h3 class="card-title">Project Title 1</h3>
+                <p class="card-text">웹·앱 연동 UI/UX 인터랙션 설계 및 시스템 구축 프로젝트 상세 기술</p>
+                <a href="#" class="card-link">자세히 보기 <i class="xi-arrow-right"></i></a>
+              </div>
+            </div>
+            <div class="portfolio-card">
+              <div class="card-img"><i class="xi-book-open"></i></div>
+              <div class="card-body">
+                <h3 class="card-title">Project Title 2</h3>
+                <p class="card-text">인디자인 데이터 병합 기반 다국어 카탈로그 편집 디자인 시스템 최적화</p>
+                <a href="#" class="card-link">자세히 보기 <i class="xi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    const root = document.getElementById('snapRoot');
+    const sections = Array.from(document.querySelectorAll('.snap-section'));
+    const bullets = Array.from(document.querySelectorAll('.bullet-nav .bullet'));
+    if (!root || sections.length === 0 || bullets.length === 0) return;
+
+    let isAnimating = false;
+    let currentIndex = 0;
+
+    function setActive(i){
+      currentIndex = Math.max(0, Math.min(sections.length - 1, i));
+      bullets.forEach((b, idx) => b.setAttribute('aria-current', idx === currentIndex ? 'true' : 'false'));
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      const idx = sections.indexOf(visible.target);
+      if (idx >= 0 && !isAnimating) setActive(idx);
+    }, { root, threshold: [0.55] });
+
+    sections.forEach(s => io.observe(s));
+
+    function goTo(i){
+      if (isAnimating) return;
+      const target = sections[i];
+      if (!target) return;
+
+      isAnimating = true;
+      setActive(i);
+      
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(() => { isAnimating = false; }, 600); 
+    }
+
+    // 불릿 클릭 이벤트 리스너 바인딩
+    bullets.forEach(bullet => {
+      bullet.addEventListener('click', () => {
+        const idx = parseInt(bullet.getAttribute('data-index'), 10);
+        if (!isNaN(idx)) goTo(idx);
+      });
+    });
+
+    root.addEventListener('wheel', (e) => {
+      if (isAnimating) return;
+
+      const active = sections[currentIndex];
+      const inner = active ? active.querySelector('.section-inner') : null;
+      if (!inner) return;
+
+      const delta = e.deltaY;
+      const atTop = inner.scrollTop <= 0;
+      const atBottom = inner.scrollTop + inner.clientHeight >= inner.scrollHeight - 1;
+
+      if ((delta > 0 && !atBottom) || (delta < 0 && !atTop)) return;
+
+      e.preventDefault();
+      if (delta > 0) goTo(Math.min(currentIndex + 1, sections.length - 1));
+      else if (delta < 0) goTo(Math.max(currentIndex - 1, 0));
+    }, { passive: false });
+
+    window.addEventListener('keydown', (e) => {
+      if (isAnimating) return;
+
+      const nextKeys = ['PageDown','ArrowDown','Space'];
+      const prevKeys = ['PageUp','ArrowUp'];
+
+      if (nextKeys.includes(e.key)){
+        e.preventDefault();
+        goTo(Math.min(currentIndex + 1, sections.length - 1));
+      }
+      if (prevKeys.includes(e.key)){
+        e.preventDefault();
+        goTo(Math.max(currentIndex - 1, 0));
+      }
+    });
+
+    setActive(0);
+  })();
+  </script>
+
+  <script>
+    (function(){
+    const lines = [
+        'WEB·APP·UI·UX',
+        '인쇄·편집·출판',
+        '올라운더 디자이너'
+    ];
+
+    const target = document.getElementById('typingText');
+    if (!target) return;
+
+    const typingSpeed = 80;
+    const lineDelay = 500;
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function type(){
+        if (lineIndex >= lines.length) return;
+
+        const currentLine = lines[lineIndex];
+
+        if (charIndex < currentLine.length) {
+        target.textContent += currentLine.charAt(charIndex);
+        charIndex++;
+        setTimeout(type, typingSpeed);
+        } else {
+        if (lineIndex < lines.length - 1) {
+            target.textContent += '\n';
+        }
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(type, lineDelay);
+        }
+    }
+
+    target.textContent = '';
+    type();
+    })();
+  </script>
+</body>
+</html>
