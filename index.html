@@ -202,7 +202,7 @@
     }
     .contact-list{
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 10px;
     }
     .contact-item,
@@ -219,6 +219,31 @@
       font-size: 14px;
       line-height: 1.4;
       text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    a.contact-item:hover,
+    .contact-link:hover{
+      color: #fff;
+    }
+    a.contact-item:hover i,
+    .contact-link:hover i{
+      color: #fff;
+    }
+    .contact-email:hover{
+      background: #03c75a;
+    }
+    .contact-phone:hover{
+      background: #2f80ed;
+    }
+    .contact-kakao:hover{
+      background: #fee500;
+      color: #191919;
+    }
+    .contact-kakao:hover i{
+      color: #191919;
+    }
+    .contact-telegram:hover{
+      background: #229ed9;
     }
     .contact-item i,
     .contact-link i{
@@ -235,13 +260,6 @@
     }
     .contact-link i{
       font-size: 20px;
-    }
-    .contact-link:hover{
-      background: var(--accent);
-      color: #fff;
-    }
-    .contact-link:hover i{
-      color: #fff;
     }
     .education-list{
       display: grid;
@@ -268,6 +286,24 @@
       font-size: 15px;
       line-height: 1.5;
       color: var(--fg);
+    }
+    .profile-intro{
+      margin-top: 4px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,.08);
+    }
+    .profile-intro-lead{
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      line-height: 1.45;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .profile-intro-detail{
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
     }
     .sr-only{
       position: absolute;
@@ -461,29 +497,33 @@
                   <div class="contact-list">
                     <div class="contact-item">
                       <i class="xi-location-arrow" aria-hidden="true"></i>
-                      <span>서울특별시 마포구</span>
+                      <span>서울특별시 관악구</span>
                     </div>
-                    <div class="contact-item">
+                    <a class="contact-item contact-email" href="mailto:s_o_j_u@naver.com">
                       <i class="xi-mail-o" aria-hidden="true"></i>
-                      <span>hello@designwelsh.com</span>
-                    </div>
-                    <div class="contact-item">
+                      <span>s_o_j_u@naver.com</span>
+                    </a>
+                    <a class="contact-item contact-phone" href="tel:01030720096">
                       <i class="xi-call" aria-hidden="true"></i>
-                      <span>010-1234-5678</span>
-                    </div>
-                    <a class="contact-link" href="https://open.kakao.com/o/sjqkvmT" target="_blank" rel="noopener noreferrer" aria-label="카카오 오픈채팅으로 이동">
+                      <span>010-3072-0096</span>
+                    </a>
+                    <!--
+                    <a class="contact-link contact-kakao" href="https://open.kakao.com/o/szekPfQf" target="_blank" rel="noopener noreferrer" aria-label="카카오 오픈채팅으로 이동">
                       <i class="xi-kakaotalk" aria-hidden="true"></i>
                       <span class="sr-only">카카오</span>
                     </a>
-                    <a class="contact-link" href="https://t.me/sojumeister" target="_blank" rel="noopener noreferrer" aria-label="텔레그램으로 이동">
+                    -->
+                    <!--
+                    <a class="contact-link contact-telegram" href="https://t.me/sojumeister" target="_blank" rel="noopener noreferrer" aria-label="텔레그램으로 이동">
                       <i class="xi-telegram" aria-hidden="true"></i>
                       <span class="sr-only">텔레그램</span>
                     </a>
+                    -->
                   </div>
                 </div>
 
                 <div class="profile-education">
-                  <h3 class="profile-subtitle">education</h3>
+                  <h3 class="profile-subtitle">education & military service</h3>
                   <div class="education-list">
                     <div class="education-item">
                       <div class="education-year">2004</div>
@@ -493,7 +533,18 @@
                       <div class="education-year">2011</div>
                       <div class="education-text">경원대학교(現가천대학교) 의상학과 졸업</div>
                     </div>
+                    <div class="education-item">
+                      <div class="education-year">2008</div>
+                      <div class="education-text">육군 병장 만기 제대(병과 : 통신)</div>
+                    </div>
                   </div>
+                </div>
+                <div class="profile-intro">
+                  <p class="profile-intro-lead">15년차 웹·그래픽·UI·UX / 인쇄·편집·출판 디자인 가능한 올라운더 디자이너입니다.</p>
+                  <p class="profile-intro-detail">다수의 웹/앱 프로젝트 경험이 있으며 디자이너이지만 직접 하드웨어를 운용하고 정비 가능하며, 개발 언어 및 OS와 기술을 이해하고 이를 바탕으로 엔지니어 및 개발자, 기술부서와 원활한 협업을 해왔습니다.<br>
+                    또한 디자인팀, 웹/앱팁 팀장으로서 개발 일정 및 팀원 관리와 조직내 부서 간, 협력사 및 클라이언트와의 커뮤니케이션 및 조율에서도 역량을 발휘해 왔습니다.<br>
+                    10년 이상의 개인/법인사업자 운영 경험을 바탕으로 프로젝트 기획, 자재조달, 공급사 관리, 발주 및 납품까지 아우르는 다양한 경험과 역량을 보유하고 있습니다.
+                  </p>
                 </div>
               </div>
             </div>
@@ -541,9 +592,9 @@
                 <div class="timeline-date">2021.08 ~ 2023.05</div>
                 <div class="timeline-title">(주)다원프라자 / (주)인쇄향</div>
                 <div class="timeline-position">디자인/IT 팀장</div>
-                <p class="timeline-desc">LGU+, CJ프레시웨이, 유한양행, 부광약품, 농심엔지니어링, KMA, (구)태평양물산, 인터텍 등 고객사 홍보물 및 인쇄물 디자인<br>
-                    태평양물산, 농심엔지니어링, 부광약품 등 고객사 대상 MRO 온라인 주문관리시스템 구축 참여(http://www.officebiz.co.kr/)<br>
-                    연매출 2억원 규모의 법인세 결산서 책자 제작 사업부문 디자인 데이터 생성 프로세스 반자동화 스크립트를 제작하여 작업효율 50% 이상 향상<br>
+                <p class="timeline-desc">LGU+, CJ프레시웨이, 유한양행, 부광약품, 농심엔지니어링, KMA, TP(舊 태평양물산), 인터텍 등 고객사 홍보물 및 인쇄물 디자인<br>
+                    태평양물산, 농심엔지니어링, 부광약품 등 고객사 대상 MRO 온라인 주문관리시스템 구축 참여<br>
+                    연매출 2억원 규모의 법인세 결산서 책자 제작 사업부문 디자인 데이터 생성 프로세스 자동화 스크립트를 제작하여 작업효율 50% 이상 향상<br>
                     하드웨어 운용, Windows 시스템, 네트워크, 소프트웨어 활용 등 직무능력 향상을 위한 직원교육 프로그램을 직접 기획하고 격주단위로 강의하여 임직원 전체의 직무능력 및 업무효율 향상<br>
                     자사 출판 서적을 교보문고, 알라딘, 예스24등 인터넷 서점에 입점하여 기존 재고 전부 소진 후 증쇄까지 진행</p>
               </div>
@@ -571,7 +622,7 @@
                 <div class="timeline-date">2026.01 ~ 2026.04</div>
                 <div class="timeline-title">(주)인쇄향</div>
                 <div class="timeline-position">디자인/IT 팀장</div>
-                <p class="timeline-desc">(주)삼구아이앤씨 온라인 B2B 명함발주 시스템 개발 참여.</p>
+                <p class="timeline-desc">(주)삼구아이앤씨 온라인 B2B 명함발주 시스템 개발 참여. 프로젝트 총괄, 디자인 템플릿 개발, 라이브 테스트 및 고객사 도입 완료</p>
               </div>
             </div>
           </div>
@@ -616,6 +667,26 @@
                   <span class="tag"><i class="xi-html5 c-html"></i> HTML</span>
                   <span class="tag"><i class="xi-css3 c-css"></i> CSS</span>
                   <span class="tag"><i class="xi-javascript c-js"></i> JavaScript</span>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3><i class="xi-cog"></i> OS</h3>
+                <div class="skill-tags">
+                  <span class="tag"><i class="xi-windows c-windows"></i> Windows</span>
+                  <span class="tag"><i class="xi-apple c-macos"></i> macOS</span>
+                  <span class="tag"><i class="xi-linux c-linux"></i> Linux</span>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3><i class="xi-usb"></i> ETC</h3>
+                <div class="skill-tags">
+                  <span class="tag"><i class="xi-office"></i> MS 오피스 제품군 및 한컴 한글 숙련 - 공문서 및 관급 행정문서 대응</span>
+                  <span class="tag"><i class="xi-network-public"></i> Windows, Unix 기반 시스템 및 기타 OS, 네트워크 구성</span>
+                  <span class="tag"><i class="xi-server"></i> PC, NAS, 중소규모 네트워크 OA 장비 등 하드웨어 운용 및 정비</span>
+                  <span class="tag"><i class="xi-adobe"></i> 윈도우즈 및 어도비, 오피스 작업 공정 매크로(자동화) 툴 제작</span>
+                  <span class="tag"><i class="xi-apps"></i> 웹 기반 CMS 모듈, 애드온 제작</span>
                 </div>
               </div>
 
