@@ -171,7 +171,7 @@
     .profile-layout{
       display: grid;
       grid-template-columns: 260px 1fr;
-      gap: 32px;
+      gap: 36px;
       align-items: start;
     }
     .profile-photo{
@@ -190,7 +190,7 @@
     }
     .profile-content{
       display: grid;
-      gap: 28px;
+      gap: 30px;
     }
     .profile-subtitle{
       margin: 0 0 14px 0;
@@ -203,27 +203,82 @@
     .contact-list{
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px 18px;
+      gap: 10px;
+    }
+    .contact-item,
+    .contact-link{
+      min-height: 42px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(0,0,0,.04);
+      color: var(--fg);
+      font-size: 14px;
+      line-height: 1.4;
+      text-decoration: none;
+    }
+    .contact-item i,
+    .contact-link i{
+      flex: 0 0 auto;
+      width: 18px;
+      text-align: center;
+      color: var(--accent);
+      font-size: 17px;
+    }
+    .contact-link{
+      justify-content: center;
+      color: var(--accent);
+      transition: background .2s, color .2s;
+    }
+    .contact-link i{
+      font-size: 20px;
+    }
+    .contact-link:hover{
+      background: var(--accent);
+      color: #fff;
+    }
+    .contact-link:hover i{
+      color: #fff;
+    }
+    .education-list{
+      display: grid;
+      gap: 10px;
       margin: 0;
     }
-    .contact-row{
+    .education-item{
       display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 10px;
+      grid-template-columns: 64px 1fr;
+      gap: 12px;
       align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    .education-item:last-child{
+      border-bottom: 0;
+    }
+    .education-year{
+      font-family: "Ubuntu", sans-serif;
       font-size: 14px;
-      line-height: 1.5;
-    }
-    .contact-label{
       color: var(--muted);
-      font-size: 13px;
     }
-    .contact-value{
+    .education-text{
+      font-size: 15px;
+      line-height: 1.5;
       color: var(--fg);
-      word-break: break-word;
     }
-    .profile-education .timeline{
-      margin-top: 2px;
+    .sr-only{
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
     /* CAREER: 타임라인 레이아웃 */
     .timeline{
@@ -367,6 +422,7 @@
       .profile-layout{ grid-template-columns: 1fr; gap: 24px; }
       .profile-photo{ max-width: 220px; }
       .contact-list{ grid-template-columns: 1fr; }
+      .education-item{ grid-template-columns: 56px 1fr; }
     }
   </style>
 </head>
@@ -403,34 +459,40 @@
                 <div class="profile-contact">
                   <h3 class="profile-subtitle">contact</h3>
                   <div class="contact-list">
-                    <div class="contact-row">
-                      <span class="contact-label">지역</span>
-                      <span class="contact-value">서울특별시 마포구</span>
+                    <div class="contact-item">
+                      <i class="xi-location-arrow" aria-hidden="true"></i>
+                      <span>서울특별시 마포구</span>
                     </div>
-                    <div class="contact-row">
-                      <span class="contact-label">이메일</span>
-                      <span class="contact-value">hello@designwelsh.com</span>
+                    <div class="contact-item">
+                      <i class="xi-mail-o" aria-hidden="true"></i>
+                      <span>hello@designwelsh.com</span>
                     </div>
-                    <div class="contact-row">
-                      <span class="contact-label">전화번호</span>
-                      <span class="contact-value">010-1234-5678</span>
+                    <div class="contact-item">
+                      <i class="xi-call" aria-hidden="true"></i>
+                      <span>010-1234-5678</span>
                     </div>
-                    <div class="contact-row">
-                      <span class="contact-label">카카오</span>
-                      <span class="contact-value">designwelsh</span>
-                    </div>
-                    <div class="contact-row">
-                      <span class="contact-label">텔레그램</span>
-                      <span class="contact-value">@designwelsh</span>
-                    </div>
+                    <a class="contact-link" href="https://open.kakao.com/o/sjqkvmT" target="_blank" rel="noopener noreferrer" aria-label="카카오 오픈채팅으로 이동">
+                      <i class="xi-kakaotalk" aria-hidden="true"></i>
+                      <span class="sr-only">카카오</span>
+                    </a>
+                    <a class="contact-link" href="https://t.me/sojumeister" target="_blank" rel="noopener noreferrer" aria-label="텔레그램으로 이동">
+                      <i class="xi-telegram" aria-hidden="true"></i>
+                      <span class="sr-only">텔레그램</span>
+                    </a>
                   </div>
                 </div>
 
                 <div class="profile-education">
                   <h3 class="profile-subtitle">education</h3>
-                  <div class="timeline">
-                    <div class="timeline-item"><div class="timeline-date">2004</div><div class="timeline-title">서울 용산고등학교 졸업</div></div>
-                    <div class="timeline-item"><div class="timeline-date">2011</div><div class="timeline-title">경원대학교(現가천대학교) 의상학과 졸업</div></div>
+                  <div class="education-list">
+                    <div class="education-item">
+                      <div class="education-year">2004</div>
+                      <div class="education-text">서울 용산고등학교 졸업</div>
+                    </div>
+                    <div class="education-item">
+                      <div class="education-year">2011</div>
+                      <div class="education-text">경원대학교(現가천대학교) 의상학과 졸업</div>
+                    </div>
                   </div>
                 </div>
               </div>
