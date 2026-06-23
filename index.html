@@ -91,6 +91,7 @@
 
     /* 은은한 배경 그라데이션 */
     .s-intro{ background: linear-gradient(180deg, rgba(99,116,184,.12), rgba(255,255,255,0)); }
+    .s1{ background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(255,255,255,0)); }
     .s2{ background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(255,255,255,0)); }
     .s3{ background: linear-gradient(180deg, rgba(99,116,184,.04), rgba(255,255,255,0)); }
     .s4{ background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(255,255,255,0)); }
@@ -313,9 +314,10 @@
 <body>
   <nav class="bullet-nav" aria-label="Section status">
     <div class="bullet" data-index="0" aria-label="Intro"></div>
-    <div class="bullet" data-index="1" aria-label="Career"></div>
-    <div class="bullet" data-index="2" aria-label="Skills"></div>
-    <div class="bullet" data-index="3" aria-label="Portfolio"></div>
+    <div class="bullet" data-index="1" aria-label="Profile"></div>
+    <div class="bullet" data-index="2" aria-label="Career"></div>
+    <div class="bullet" data-index="3" aria-label="Skills"></div>
+    <div class="bullet" data-index="4" aria-label="Portfolio"></div>
   </nav>
 
   <main class="snap-root" id="snapRoot">
@@ -327,7 +329,7 @@
       </div>
     </section>
 
-    <section class="snap-section s2" id="career">
+    <section class="snap-section s1" id="profile">
       <div class="section-inner">
         <div class="content-box">
           <div class="content-scroll">
@@ -336,7 +338,15 @@
               <div class="timeline-item"><div class="timeline-date">2004</div><div class="timeline-title">서울 용산고등학교 졸업</div></div>
               <div class="timeline-item"><div class="timeline-date">2011</div><div class="timeline-title">경원대학교(現가천대학교) 의상학과 졸업</div></div>
             </div>
-            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="snap-section s2" id="career">
+      <div class="section-inner">
+        <div class="content-box">
+          <div class="content-scroll">
             <h2 class="section-title">career</h2>
             <div class="timeline">
               <div class="timeline-item">
@@ -533,12 +543,12 @@
       if (isAnimating) return;
 
       const active = sections[currentIndex];
-      const inner = active ? active.querySelector('.section-inner') : null;
-      if (!inner) return;
+      const scrollTarget = active ? active.querySelector('.content-scroll') || active.querySelector('.section-inner') : null;
+      if (!scrollTarget) return;
 
       const delta = e.deltaY;
-      const atTop = inner.scrollTop <= 0;
-      const atBottom = inner.scrollTop + inner.clientHeight >= inner.scrollHeight - 1;
+      const atTop = scrollTarget.scrollTop <= 0;
+      const atBottom = scrollTarget.scrollTop + scrollTarget.clientHeight >= scrollTarget.scrollHeight - 1;
 
       if ((delta > 0 && !atBottom) || (delta < 0 && !atTop)) return;
 
