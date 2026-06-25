@@ -426,52 +426,288 @@
       color: #fff;
     }
 
-    /* PORTFOLIO: 카드 레이아웃 */
+    /* PORTFOLIO: JSON-driven gallery */
+    .portfolio-head{
+      display: grid;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .portfolio-head .section-title{
+      margin-bottom: 0;
+    }
+    .portfolio-tabs{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-start;
+    }
+    .portfolio-tab{
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      line-height: 1;
+      padding: 9px 13px;
+      transition: background .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .portfolio-tab:hover,
+    .portfolio-tab[aria-selected="true"]{
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
     .portfolio-grid{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
     }
     .portfolio-card{
+      position: relative;
+      appearance: none;
+      width: 100%;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 8px;
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+      padding: 0;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
       background: var(--card);
+      color: inherit;
     }
-    .portfolio-card:hover{
+    .portfolio-card:hover,
+    .portfolio-card:focus-visible{
       transform: translateY(-4px);
       box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      border-color: rgba(92,106,196,.35);
+      outline: none;
     }
-    .card-img{
-      height: 160px;
-      background: rgba(0,0,0,.03);
+    .portfolio-thumb{
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: rgba(0,0,0,.04);
+      overflow: hidden;
+    }
+    .portfolio-thumb img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .28s ease;
+    }
+    .portfolio-card:hover .portfolio-thumb img,
+    .portfolio-card:focus-visible .portfolio-thumb img{
+      transform: scale(1.04);
+    }
+    .portfolio-card-body{
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px;
+      background: rgba(0,0,0,.5);
+      color: #fff;
+      transition: opacity .24s ease, visibility .24s ease;
+    }
+    .portfolio-card:hover .portfolio-card-body,
+    .portfolio-card:focus-visible .portfolio-card-body{
+      opacity: 0;
+      visibility: hidden;
+    }
+    .portfolio-card-category{
+      display: block;
+      margin-bottom: 7px;
+      color: rgba(255,255,255,.82);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .portfolio-card-title{
+      margin: 0;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .portfolio-empty{
+      display: none;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+    .portfolio-empty.is-visible{ display: block; }
+    .portfolio-modal{
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: stretch;
+      justify-content: center;
+      padding: 28px;
+      background: rgba(10,12,20,.72);
+      backdrop-filter: blur(6px);
+    }
+    .portfolio-modal.is-open{ display: flex; }
+    .portfolio-dialog{
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(300px, .6fr);
+      gap: 0;
+      width: min(1180px, 100%);
+      max-height: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 24px 70px rgba(0,0,0,.28);
+    }
+    .portfolio-viewer{
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      min-width: 0;
+      background: #111318;
+    }
+    .portfolio-main-image{
       display: grid;
       place-items: center;
-      color: var(--muted);
-      font-size: 24px;
+      min-height: 0;
+      padding: 24px;
     }
-    .card-body{
-      padding: 16px;
+    .portfolio-main-image img{
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      object-fit: contain;
     }
-    .card-title{
-      margin: 0 0 8px 0;
-      font-size: 16px;
-      font-weight: 500;
+    .portfolio-thumbs{
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px;
+      border-top: 1px solid rgba(255,255,255,.12);
     }
-    .card-text{
-      margin: 0 0 12px 0;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
+    .portfolio-thumb-button{
+      flex: 0 0 72px;
+      width: 72px;
+      height: 54px;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(255,255,255,.08);
+      cursor: pointer;
+      opacity: .65;
+      transition: opacity .18s ease, border-color .18s ease;
     }
-    .card-link{
-      font-size: 13px;
+    .portfolio-thumb-button:hover,
+    .portfolio-thumb-button[aria-current="true"]{
+      border-color: #fff;
+      opacity: 1;
+    }
+    .portfolio-thumb-button img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .portfolio-detail{
+      overflow-y: auto;
+      padding: 34px 32px 32px;
+    }
+    .portfolio-modal-category{
+      display: block;
+      margin-bottom: 10px;
       color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
+    .portfolio-modal-title{
+      margin: 0 0 16px;
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 600;
+    }
+    .portfolio-modal-description{
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+    .portfolio-meta{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .portfolio-meta li{
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .portfolio-close{
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(0,0,0,.58);
+      color: #fff;
+      cursor: pointer;
+    }
+    .portfolio-close i{ font-size: 20px; }
+    .portfolio-close:hover,
+    .portfolio-close:focus-visible{
+      background: var(--accent);
+      outline: none;
+    }
+    body.portfolio-modal-open{ overflow: hidden; }
 
+    @media (max-width: 899px){
+      .portfolio-head{
+        gap: 12px;
+      }
+      .portfolio-modal{
+        padding: 0;
+      }
+      .portfolio-dialog{
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 55vh) minmax(0, 45vh);
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+      }
+      .portfolio-detail{
+        padding: 26px 22px 30px;
+      }
+      .portfolio-modal-title{
+        font-size: 22px;
+      }
+    }
     @keyframes blink{
       0%, 49% { opacity: 1; }
       50%, 100% { opacity: 0; }
@@ -747,8 +983,7 @@
                 <div class="timeline-date">2023.11 ~ 2024.10</div>
                 <div class="timeline-title">(주)팩트코퍼레이션 → (주)오로라메타</div>
                 <div class="timeline-position">웹/앱팁 팀장</div>
-                <p class="timeline-desc">동일 프로젝트 고용승계 전적<br>
-                    스크린골프 게임 개발<br>
+                <p class="timeline-desc">동일 프로젝트 고용승계 전적(스크린골프 게임 개발)<br>
                     자사 사이트 및 스크린골프 매장 관리 웹사이트 구축 및 디자인, 자사 스크린골프 앱 UI/UX 디자인, 디자인 리소스 생산, 웹/앱 개발 일정 및 팀원 관리</p>
               </div>
               <div class="timeline-item">
@@ -761,7 +996,7 @@
                 <div class="timeline-date">2026.01 ~ 2026.04</div>
                 <div class="timeline-title">(주)인쇄향</div>
                 <div class="timeline-position">디자인/IT 팀장</div>
-                <p class="timeline-desc">(주)삼구아이앤씨 온라인 B2B 명함발주 시스템 개발 참여. 프로젝트 총괄, 디자인 템플릿 개발, 라이브 테스트 및 고객사 도입 완료</p>
+                <p class="timeline-desc">(주)삼구아이앤씨 온라인 B2B 명함발주 시스템 개발 참여. 프로젝트 총괄, 디자인 템플릿 개발, 라이브 테스트 및 고객사 도입</p>
               </div>
             </div>
           </div>
@@ -775,7 +1010,7 @@
           <div class="content-scroll">
             <h2 class="section-title">skills</h2>
             <div class="skills-grid">
-              
+
               <div class="skill-category">
                 <h3><i class="xi-wrench"></i> TOOLS</h3>
                 <div class="skill-tags">
@@ -789,7 +1024,7 @@
                   <span class="tag"><img src="img/figma.svg"> Figma</span>
                 </div>
               </div>
-              
+
               <div class="skill-category">
                 <h3><i class="xi-chart-bar"></i> CMS</h3>
                 <div class="skill-tags">
@@ -837,30 +1072,33 @@
 
     <section class="snap-section s4" id="portfolio">
       <div class="section-inner">
-        <div class="content-box">
-          <h2 class="section-title">portfolio</h2>
-          <div class="portfolio-grid">
-            <div class="portfolio-card">
-              <div class="card-img"><i class="xi-folder-open"></i></div>
-              <div class="card-body">
-                <h3 class="card-title">Project Title 1</h3>
-                <p class="card-text">웹·앱 연동 UI/UX 인터랙션 설계 및 시스템 구축 프로젝트 상세 기술</p>
-                <a href="#" class="card-link">자세히 보기 <i class="xi-arrow-right"></i></a>
-              </div>
-            </div>
-            <div class="portfolio-card">
-              <div class="card-img"><i class="xi-book-open"></i></div>
-              <div class="card-body">
-                <h3 class="card-title">Project Title 2</h3>
-                <p class="card-text">인디자인 데이터 병합 기반 다국어 카탈로그 편집 디자인 시스템 최적화</p>
-                <a href="#" class="card-link">자세히 보기 <i class="xi-arrow-right"></i></a>
-              </div>
-            </div>
+        <div class="content-box content-scroll">
+          <div class="portfolio-head">
+            <h2 class="section-title">portfolio</h2>
+            <div class="portfolio-tabs" id="portfolioTabs" role="tablist" aria-label="Portfolio categories"></div>
           </div>
+          <div class="portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
+          <p class="portfolio-empty" id="portfolioEmpty">등록된 프로젝트가 없습니다.</p>
         </div>
       </div>
     </section>
   </main>
+
+  <div class="portfolio-modal" id="portfolioModal" role="dialog" aria-modal="true" aria-labelledby="portfolioModalTitle" aria-hidden="true">
+    <div class="portfolio-dialog">
+      <button class="portfolio-close" type="button" id="portfolioClose" aria-label="Close portfolio detail"><i class="xi-close" aria-hidden="true"></i></button>
+      <div class="portfolio-viewer">
+        <div class="portfolio-main-image"><img id="portfolioMainImage" src="" alt=""></div>
+        <div class="portfolio-thumbs" id="portfolioThumbs" aria-label="Project images"></div>
+      </div>
+      <div class="portfolio-detail">
+        <span class="portfolio-modal-category" id="portfolioModalCategory"></span>
+        <h3 class="portfolio-modal-title" id="portfolioModalTitle"></h3>
+        <p class="portfolio-modal-description" id="portfolioModalDescription"></p>
+        <ul class="portfolio-meta" id="portfolioMeta"></ul>
+      </div>
+    </div>
+  </div>
   <div class="contact-fab" id="contactFab">
     <div class="contact-fab-actions" id="contactFabActions" aria-label="Contact shortcuts">
       <a class="contact-fab-action contact-fab-phone" href="tel:01030720096" aria-label="Call" title="Call"><i class="xi-call" aria-hidden="true"></i></a>
@@ -906,7 +1144,7 @@
 
       isAnimating = true;
       setActive(i);
-      
+
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       window.setTimeout(() => { isAnimating = false; }, 600); 
     }
@@ -996,7 +1234,221 @@
     type();
     })();
   </script>
+
+
+
+
   <script>
+    (function(){
+      const categories = ['ALL', 'SYSTEM', 'WEB', 'LOGO', 'PRINT'];
+      const fallbackItems = [
+        {
+          id: 'web-portfolio-site',
+          category: 'WEB',
+          title: 'Portfolio Website Renewal',
+          thumbnail: 'img/resume_bg.jpg',
+          images: ['img/resume_bg.jpg', 'img/profile.jpg'],
+          description: '포트폴리오 사이트의 메인 화면, 프로필, 커리어, 포트폴리오 구조를 정리한 웹 프로젝트 샘플입니다. 실제 설명은 portfolio.json에서 수정할 수 있습니다.',
+          meta: ['Responsive Web', 'HTML/CSS/JS', 'GitHub Pages']
+        },
+        {
+          id: 'system-workflow',
+          category: 'SYSTEM',
+          title: 'Office System Workflow',
+          thumbnail: 'img/blender_icon_512x512.png',
+          images: ['img/blender_icon_512x512.png', 'img/CorelDRAW_Graphics.png'],
+          description: '업무 환경 구축, 장비 관리, 자동화 흐름을 정리한 시스템 프로젝트 샘플입니다.',
+          meta: ['System Setup', 'NAS/PC', 'Automation']
+        },
+        {
+          id: 'logo-identity',
+          category: 'LOGO',
+          title: 'Brand Identity Sample',
+          thumbnail: 'img/figma.svg',
+          images: ['img/figma.svg', 'img/CorelDRAW_Graphics.png'],
+          description: '브랜드 아이덴티티와 로고 응용안을 보여주기 위한 샘플 프로젝트입니다.',
+          meta: ['Logo', 'Identity', 'Vector']
+        },
+        {
+          id: 'print-catalog',
+          category: 'PRINT',
+          title: 'Print Catalog Sample',
+          thumbnail: 'img/CorelDRAW_Graphics.png',
+          images: ['img/CorelDRAW_Graphics.png', 'img/resume_bg.jpg'],
+          description: '카탈로그, 리플렛, 인쇄물 편집 작업을 소개하기 위한 샘플 프로젝트입니다.',
+          meta: ['Editorial', 'Print', 'Layout']
+        }
+      ];
+
+      const tabs = document.getElementById('portfolioTabs');
+      const grid = document.getElementById('portfolioGrid');
+      const empty = document.getElementById('portfolioEmpty');
+      const modal = document.getElementById('portfolioModal');
+      const closeButton = document.getElementById('portfolioClose');
+      const mainImage = document.getElementById('portfolioMainImage');
+      const thumbs = document.getElementById('portfolioThumbs');
+      const modalCategory = document.getElementById('portfolioModalCategory');
+      const modalTitle = document.getElementById('portfolioModalTitle');
+      const modalDescription = document.getElementById('portfolioModalDescription');
+      const metaList = document.getElementById('portfolioMeta');
+
+      if (!tabs || !grid || !modal) return;
+
+      let items = [];
+      let currentCategory = 'ALL';
+      let currentItem = null;
+      let currentImageIndex = 0;
+      let lastFocus = null;
+
+      function normalizeItems(data){
+        if (!Array.isArray(data)) return fallbackItems;
+        return data.filter(item => item && item.title && item.thumbnail).map(item => ({
+          id: item.id || item.title.toLowerCase().replace(/\s+/g, '-'),
+          category: (item.category || 'WEB').toUpperCase(),
+          title: item.title,
+          thumbnail: item.thumbnail,
+          images: Array.isArray(item.images) && item.images.length ? item.images : [item.thumbnail],
+          description: item.description || '',
+          meta: Array.isArray(item.meta) ? item.meta : []
+        }));
+      }
+
+      function renderTabs(){
+        tabs.innerHTML = '';
+        categories.forEach(category => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'portfolio-tab';
+          button.setAttribute('role', 'tab');
+          button.setAttribute('aria-selected', String(category === currentCategory));
+          button.textContent = category;
+          button.addEventListener('click', () => {
+            currentCategory = category;
+            renderTabs();
+            renderGrid();
+          });
+          tabs.appendChild(button);
+        });
+      }
+
+      function renderGrid(){
+        const visibleItems = currentCategory === 'ALL'
+          ? items
+          : items.filter(item => item.category === currentCategory);
+
+        grid.innerHTML = '';
+        empty.classList.toggle('is-visible', visibleItems.length === 0);
+
+        visibleItems.forEach(item => {
+          const card = document.createElement('button');
+          const thumb = document.createElement('span');
+          const image = document.createElement('img');
+          const body = document.createElement('span');
+          const category = document.createElement('span');
+          const title = document.createElement('span');
+
+          card.type = 'button';
+          card.className = 'portfolio-card';
+          thumb.className = 'portfolio-thumb';
+          image.src = item.thumbnail;
+          image.alt = `${item.title} thumbnail`;
+          image.loading = 'lazy';
+          body.className = 'portfolio-card-body';
+          category.className = 'portfolio-card-category';
+          category.textContent = item.category;
+          title.className = 'portfolio-card-title';
+          title.textContent = item.title;
+
+          thumb.appendChild(image);
+          body.append(category, title);
+          card.append(thumb, body);
+          card.addEventListener('click', () => openModal(item));
+          grid.appendChild(card);
+        });
+      }
+
+      function setModalImage(index){
+        if (!currentItem) return;
+        const images = currentItem.images.length ? currentItem.images : [currentItem.thumbnail];
+        currentImageIndex = (index + images.length) % images.length;
+        mainImage.src = images[currentImageIndex];
+        mainImage.alt = `${currentItem.title} image ${currentImageIndex + 1}`;
+        Array.from(thumbs.children).forEach((button, idx) => {
+          button.setAttribute('aria-current', String(idx === currentImageIndex));
+        });
+      }
+
+      function openModal(item){
+        currentItem = item;
+        currentImageIndex = 0;
+        lastFocus = document.activeElement;
+
+        modalCategory.textContent = item.category;
+        modalTitle.textContent = item.title;
+        modalDescription.textContent = item.description;
+        metaList.innerHTML = '';
+        item.meta.forEach(text => {
+          const li = document.createElement('li');
+          li.textContent = text;
+          metaList.appendChild(li);
+        });
+
+        thumbs.innerHTML = '';
+        item.images.forEach((src, index) => {
+          const button = document.createElement('button');
+          const image = document.createElement('img');
+          button.type = 'button';
+          button.className = 'portfolio-thumb-button';
+          button.setAttribute('aria-label', `View image ${index + 1}`);
+          image.src = src;
+          image.alt = '';
+          button.appendChild(image);
+          button.addEventListener('click', () => setModalImage(index));
+          thumbs.appendChild(button);
+        });
+
+        setModalImage(0);
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('portfolio-modal-open');
+        closeButton.focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('portfolio-modal-open');
+        currentItem = null;
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      }
+
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', event => {
+        if (event.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', event => {
+        if (!modal.classList.contains('is-open')) return;
+        if (event.key === 'Escape') closeModal();
+        if (event.key === 'ArrowLeft') setModalImage(currentImageIndex - 1);
+        if (event.key === 'ArrowRight') setModalImage(currentImageIndex + 1);
+      });
+
+      fetch('portfolio.json', { cache: 'no-store' })
+        .then(response => response.ok ? response.json() : fallbackItems)
+        .then(data => {
+          items = normalizeItems(data);
+          renderTabs();
+          renderGrid();
+        })
+        .catch(() => {
+          items = fallbackItems;
+          renderTabs();
+          renderGrid();
+        });
+    })();
+  </script>
+<script>
     (function(){
       const fab = document.getElementById('contactFab');
       if (!fab) return;

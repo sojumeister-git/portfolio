@@ -1,0 +1,242 @@
+[
+    {
+        "id":  "web-portfolio-site",
+        "thumbnail":  "img/resume_bg.jpg",
+        "description":  "Portfolio site renewal sample. Replace this text with the actual project summary.",
+        "meta":  [
+                     "Responsive Web",
+                     "HTML/CSS/JS",
+                     "GitHub Pages"
+                 ],
+        "images":  [
+                       "img/resume_bg.jpg",
+                       "img/profile.jpg"
+                   ],
+        "category":  "WEB",
+        "title":  "Portfolio Website Renewal"
+    },
+    {
+        "id":  "web-order-system",
+        "thumbnail":  "img/profile.jpg",
+        "description":  "Web ordering interface sample for forms, dashboard flow, and client-side publishing.",
+        "meta":  [
+                     "Web UI",
+                     "Publishing",
+                     "Form Flow"
+                 ],
+        "images":  [
+                       "img/profile.jpg",
+                       "img/resume_bg.jpg"
+                   ],
+        "category":  "WEB",
+        "title":  "B2B Order Interface"
+    },
+    {
+        "id":  "web-cms-module",
+        "thumbnail":  "img/figma.svg",
+        "description":  "CMS module screen and management UI sample.",
+        "meta":  [
+                     "CMS",
+                     "Admin UI",
+                     "Component"
+                 ],
+        "images":  [
+                       "img/figma.svg",
+                       "img/CorelDRAW_Graphics.png"
+                   ],
+        "category":  "WEB",
+        "title":  "CMS Module UI"
+    },
+    {
+        "id":  "web-landing-page",
+        "thumbnail":  "img/CorelDRAW_Graphics.png",
+        "description":  "Landing page layout sample for campaign content and responsive sections.",
+        "meta":  [
+                     "Landing",
+                     "Responsive",
+                     "Campaign"
+                 ],
+        "images":  [
+                       "img/CorelDRAW_Graphics.png",
+                       "img/resume_bg.jpg"
+                   ],
+        "category":  "WEB",
+        "title":  "Campaign Landing Page"
+    },
+    {
+        "id":  "system-office-workflow",
+        "thumbnail":  "img/blender_icon_512x512.png",
+        "description":  "System workflow sample for office hardware, NAS, and maintenance structure.",
+        "meta":  [
+                     "System Setup",
+                     "NAS/PC",
+                     "Automation"
+                 ],
+        "images":  [
+                       "img/blender_icon_512x512.png",
+                       "img/CorelDRAW_Graphics.png"
+                   ],
+        "category":  "SYSTEM",
+        "title":  "Office System Workflow"
+    },
+    {
+        "id":  "system-print-automation",
+        "thumbnail":  "img/CorelDRAW_Graphics.png",
+        "description":  "Automation sample for repeated print and design production tasks.",
+        "meta":  [
+                     "Automation",
+                     "Print Process",
+                     "Macro"
+                 ],
+        "images":  [
+                       "img/CorelDRAW_Graphics.png",
+                       "img/blender_icon_512x512.png"
+                   ],
+        "category":  "SYSTEM",
+        "title":  "Print Process Automation"
+    },
+    {
+        "id":  "system-network-maintenance",
+        "thumbnail":  "img/resume_bg.jpg",
+        "description":  "Network and workstation maintenance project sample.",
+        "meta":  [
+                     "Network",
+                     "Windows",
+                     "Maintenance"
+                 ],
+        "images":  [
+                       "img/resume_bg.jpg",
+                       "img/blender_icon_512x512.png"
+                   ],
+        "category":  "SYSTEM",
+        "title":  "Network Maintenance Kit"
+    },
+    {
+        "id":  "logo-brand-identity",
+        "thumbnail":  "img/figma.svg",
+        "description":  "Brand identity and logo application sample.",
+        "meta":  [
+                     "Logo",
+                     "Identity",
+                     "Vector"
+                 ],
+        "images":  [
+                       "img/figma.svg",
+                       "img/CorelDRAW_Graphics.png"
+                   ],
+        "category":  "LOGO",
+        "title":  "Brand Identity Sample"
+    },
+    {
+        "id":  "logo-symbol-system",
+        "thumbnail":  "img/CorelDRAW_Graphics.png",
+        "description":  "Symbol grid and application variation sample.",
+        "meta":  [
+                     "Symbol",
+                     "Grid",
+                     "Variation"
+                 ],
+        "images":  [
+                       "img/CorelDRAW_Graphics.png",
+                       "img/figma.svg"
+                   ],
+        "category":  "LOGO",
+        "title":  "Symbol System Study"
+    },
+    {
+        "id":  "logo-startup-mark",
+        "thumbnail":  "img/profile.jpg",
+        "description":  "Logo package sample for a digital product or small business.",
+        "meta":  [
+                     "Logo Package",
+                     "Brand Guide",
+                     "Digital"
+                 ],
+        "images":  [
+                       "img/profile.jpg",
+                       "img/figma.svg"
+                   ],
+        "category":  "LOGO",
+        "title":  "Startup Logo Package"
+    },
+    {
+        "id":  "logo-event-emblem",
+        "thumbnail":  "img/resume_bg.jpg",
+        "description":  "Event emblem and secondary mark sample.",
+        "meta":  [
+                     "Emblem",
+                     "Event",
+                     "Application"
+                 ],
+        "images":  [
+                       "img/resume_bg.jpg",
+                       "img/CorelDRAW_Graphics.png"
+                   ],
+        "category":  "LOGO",
+        "title":  "Event Emblem Design"
+    },
+    {
+        "id":  "print-catalog",
+        "thumbnail":  "img/CorelDRAW_Graphics.png",
+        "description":  "Catalog and booklet layout sample for print production.",
+        "meta":  [
+                     "Editorial",
+                     "Print",
+                     "Layout"
+                 ],
+        "images":  [
+                       "img/CorelDRAW_Graphics.png",
+                       "img/resume_bg.jpg"
+                   ],
+        "category":  "PRINT",
+        "title":  "Print Catalog Sample"
+    },
+    {
+        "id":  "print-brochure",
+        "thumbnail":  "img/resume_bg.jpg",
+        "description":  "Corporate brochure layout and production sample.",
+        "meta":  [
+                     "Brochure",
+                     "Editorial",
+                     "CMYK"
+                 ],
+        "images":  [
+                       "img/resume_bg.jpg",
+                       "img/CorelDRAW_Graphics.png"
+                   ],
+        "category":  "PRINT",
+        "title":  "Corporate Brochure"
+    },
+    {
+        "id":  "print-namecard-system",
+        "thumbnail":  "img/figma.svg",
+        "description":  "Business card template system sample for repeated order workflows.",
+        "meta":  [
+                     "Template",
+                     "Name Card",
+                     "Production"
+                 ],
+        "images":  [
+                       "img/figma.svg",
+                       "img/CorelDRAW_Graphics.png"
+                   ],
+        "category":  "PRINT",
+        "title":  "Name Card Template System"
+    },
+    {
+        "id":  "print-poster-series",
+        "thumbnail":  "img/profile.jpg",
+        "description":  "Poster series layout sample for offline campaign material.",
+        "meta":  [
+                     "Poster",
+                     "Campaign",
+                     "Layout"
+                 ],
+        "images":  [
+                       "img/profile.jpg",
+                       "img/resume_bg.jpg"
+                   ],
+        "category":  "PRINT",
+        "title":  "Poster Series Layout"
+    }
+]
