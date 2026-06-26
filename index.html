@@ -55,6 +55,8 @@
       scroll-snap-align: start;
       scroll-snap-stop: always;
       position: relative;
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
     /* 공통 레이아웃: flex로 변경 (컨텐츠 박스 스크롤을 위함) */
@@ -117,6 +119,8 @@
 
     /* 패딩 안쪽에서 스크롤되도록 잡아주는 새로운 컨테이너 */
     .content-scroll {
+      flex: 1 1 auto;
+      min-height: 0;
       overflow-y: auto;
       padding-right: 12px; /* 스크롤바와 컨텐츠 사이의 간격 */
     }
@@ -461,6 +465,14 @@
       background: var(--accent);
       border-color: var(--accent);
       color: #fff;
+    }
+    #portfolio .content-box{
+      height: min(90vh, calc(100vh - 100px));
+    }
+    #portfolio .content-scroll{
+      flex: 0 0 var(--portfolio-scroll-height, auto);
+      height: var(--portfolio-scroll-height, auto);
+      max-height: 100%;
     }
     .portfolio-grid{
       display: grid;
@@ -851,8 +863,8 @@
     <section class="snap-section s1" id="profile">
       <div class="section-inner">
         <div class="content-box">
+          <h2 class="section-title">profile</h2>
           <div class="content-scroll">
-            <h2 class="section-title">profile</h2>
             <div class="profile-layout">
               <div class="profile-identity">
                 <div class="profile-photo">
@@ -916,7 +928,7 @@
                 </div>
                 <div class="profile-intro">
                   <p class="profile-intro-lead">15년차 웹·그래픽·UI·UX / 인쇄·편집·출판 디자인 가능한 올라운더 디자이너입니다.</p>
-                  <p class="profile-intro-detail">다수의 웹/앱 프로젝트 경험이 있으며 디자이너이지만 직접 하드웨어를 운용하고 정비 가능하며, 개발 언어 및 OS와 기술을 이해하고 이를 바탕으로 엔지니어 및 개발자, 기술부서와 원활한 협업을 해왔습니다.<br>
+                  <p class="profile-intro-detail">다수의 웹/앱 프로젝트 경험이 있으며 디자이너이지만 직접 하드웨어를 운용하고 정비 가능하며, 개발 언어 및 OS와 기술을 이해하고 이를 바탕으로 엔지니어 및 개발자, 기술부서와 원활한 협업을 해 왔습니다.<br>
                     또한 디자인팀, 웹/앱팁 팀장으로서 개발 일정 및 팀원 관리와 조직내 부서 간, 협력사 및 클라이언트와의 커뮤니케이션 및 조율에서도 역량을 발휘해 왔습니다.<br>
                     10년 이상의 개인/법인사업자 운영 경험을 바탕으로 프로젝트 기획, 자재조달, 공급사 관리, 발주 및 납품까지 아우르는 다양한 경험과 역량을 보유하고 있습니다.
                   </p>
@@ -930,8 +942,8 @@
     <section class="snap-section s2" id="career">
       <div class="section-inner">
         <div class="content-box">
+          <h2 class="section-title">career</h2>
           <div class="content-scroll">
-            <h2 class="section-title">career</h2>
             <div class="timeline">
               <div class="timeline-item">
                 <div class="timeline-date">2009.07 ~ 2010.08</div>
@@ -1007,8 +1019,8 @@
     <section class="snap-section s3" id="skill">
       <div class="section-inner">
         <div class="content-box">
+          <h2 class="section-title">skills</h2>
           <div class="content-scroll">
-            <h2 class="section-title">skills</h2>
             <div class="skills-grid">
 
               <div class="skill-category">
@@ -1072,13 +1084,15 @@
 
     <section class="snap-section s4" id="portfolio">
       <div class="section-inner">
-        <div class="content-box content-scroll">
+        <div class="content-box">
           <div class="portfolio-head">
             <h2 class="section-title">portfolio</h2>
             <div class="portfolio-tabs" id="portfolioTabs" role="tablist" aria-label="Portfolio categories"></div>
           </div>
-          <div class="portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
-          <p class="portfolio-empty" id="portfolioEmpty">등록된 프로젝트가 없습니다.</p>
+          <div class="content-scroll">
+            <div class="portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
+            <p class="portfolio-empty" id="portfolioEmpty">등록된 프로젝트가 없습니다.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -1283,6 +1297,7 @@
       const tabs = document.getElementById('portfolioTabs');
       const grid = document.getElementById('portfolioGrid');
       const empty = document.getElementById('portfolioEmpty');
+      const portfolioScroll = grid ? grid.closest('.content-scroll') : null;
       const modal = document.getElementById('portfolioModal');
       const closeButton = document.getElementById('portfolioClose');
       const mainImage = document.getElementById('portfolioMainImage');
@@ -1331,6 +1346,31 @@
         });
       }
 
+      function updatePortfolioScrollHeight(){
+        if (!portfolioScroll || !grid) return;
+
+        portfolioScroll.style.removeProperty('--portfolio-scroll-height');
+        const firstCard = grid.querySelector('.portfolio-card');
+        const contentBox = portfolioScroll.closest('.content-box');
+        const portfolioHead = contentBox ? contentBox.querySelector('.portfolio-head') : null;
+        if (!firstCard || !contentBox || !portfolioHead) return;
+
+        const gridStyles = window.getComputedStyle(grid);
+        const boxStyles = window.getComputedStyle(contentBox);
+        const headStyles = window.getComputedStyle(portfolioHead);
+        const rowGap = parseFloat(gridStyles.rowGap || gridStyles.gap) || 0;
+        const cardHeight = firstCard.getBoundingClientRect().height;
+        const boxInnerHeight = contentBox.clientHeight - parseFloat(boxStyles.paddingTop) - parseFloat(boxStyles.paddingBottom);
+        const headHeight = portfolioHead.offsetHeight + parseFloat(headStyles.marginBottom || 0);
+        const availableHeight = boxInnerHeight - headHeight;
+        if (!cardHeight || !availableHeight || availableHeight <= 0) return;
+
+        const rowsThatFit = Math.floor((availableHeight + rowGap) / (cardHeight + rowGap));
+        const visibleRows = Math.max(1, Math.min(4, rowsThatFit));
+        const scrollHeight = (cardHeight * visibleRows) + (rowGap * Math.max(0, visibleRows - 1));
+        portfolioScroll.style.setProperty('--portfolio-scroll-height', `${scrollHeight}px`);
+      }
+
       function renderGrid(){
         const visibleItems = currentCategory === 'ALL'
           ? items
@@ -1365,6 +1405,8 @@
           card.addEventListener('click', () => openModal(item));
           grid.appendChild(card);
         });
+
+        requestAnimationFrame(updatePortfolioScrollHeight);
       }
 
       function setModalImage(index){
@@ -1432,6 +1474,10 @@
         if (event.key === 'Escape') closeModal();
         if (event.key === 'ArrowLeft') setModalImage(currentImageIndex - 1);
         if (event.key === 'ArrowRight') setModalImage(currentImageIndex + 1);
+      });
+
+      window.addEventListener('resize', () => {
+        requestAnimationFrame(updatePortfolioScrollHeight);
       });
 
       fetch('portfolio.json', { cache: 'no-store' })
