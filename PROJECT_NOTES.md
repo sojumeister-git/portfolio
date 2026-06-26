@@ -2,44 +2,138 @@
 
 ## Overview
 
-- Site: `박상화 | 올라운더 디자이너`
-- Type: static portfolio site (HTML/CSS/JavaScript in a single page)
+- Project root: `C:\Projects`
+- Type: static portfolio site using HTML/CSS/JavaScript
 - Repository: `https://github.com/sojumeister-git/portfolio.git`
-- Published site: `https://www.designwelsh.com/resume/test2.html`
-- Deployment target: GitHub Pages
+- Deployment target: GitHub Pages / static hosting
+- Current source of truth: `index.html`
+- Portfolio data source: `portfolio.json`
 
 ## Repository Layout
 
 ```text
 .
-├─ index.html       # Main portfolio page: markup, styles, and scripts
-├─ background.html  # Background/visual resource page
-├─ img/             # Images and icon assets referenced by index.html
-├─ favicon.ico
-├─ .gitignore
-└─ PROJECT_NOTES.md
+|-- index.html          # Main single-page portfolio: layout, styles, scripts
+|-- portfolio.json      # Portfolio project data loaded by index.html
+|-- background.html     # Background/visual resource page
+|-- img/                # Images and icon assets
+|-- favicon.ico
+|-- .gitignore
+`-- PROJECT_NOTES.md
 ```
 
-## Editing Rules
+## Current Page Structure
 
-- Use `index.html` as the current source of truth. Older `test.html` and `test2.html` files are intentionally removed.
-- Keep image and icon references relative to the repository root, for example: `img/profile.jpg`.
-- Do not use `../img/...` paths. They break after publishing the repository root through GitHub Pages.
-- The profile section is positioned between the intro and career sections. When adding/removing full-page sections, update the bullet navigation and its JavaScript index values together.
-- Preserve the existing Korean UTF-8 encoding when editing files.
-- Do not commit personal editor settings. `.vscode/`, `Thumbs.db`, and `.DS_Store` are ignored.
+The page is organized as full-screen snap sections:
+
+1. `intro`
+2. `profile`
+3. `career`
+4. `skill`
+5. `portfolio`
+
+The bullet navigation has 5 bullets and must stay aligned with this section order. If a section is added, removed, or reordered, update both the bullet markup and scroll/index logic in `index.html`.
+
+## Layout And Scroll Rules
+
+- The intro section has no inner content box scroll.
+- All non-intro sections use the common `content-box` layout.
+- Section titles are fixed inside the content box and are placed outside `.content-scroll`.
+- Scrolling starts below the section title.
+- In the portfolio section, the fixed area is `.portfolio-head`, which contains the section title and category tabs. Scrolling starts below the tabs.
+- `.content-scroll` is the only inner scroll container for non-intro sections.
+- Scrollbars should remain inside the content-box padding area.
+- Section text uses `word-break: keep-all` and `overflow-wrap: break-word` to prefer word-based wrapping while still preventing long strings from overflowing.
+
+## Profile Section
+
+- Profile image: `img/profile.jpg`
+- Contact rows currently show location, email, and phone.
+- Email uses `mailto:`.
+- Phone uses `tel:`.
+- KakaoTalk and Telegram contact rows in the profile section are currently commented out.
+- A separate floating contact shortcut button is available at the bottom-right of the browser.
+
+## Floating Contact Shortcut
+
+- Main floating button uses `xi-comment`.
+- Hover or tap opens circular shortcut icons for phone, email, KakaoTalk, and Telegram.
+- Contact icons start at about 50% opacity and animate to 100% on hover/focus.
+- KakaoTalk and Telegram use their official brand colors.
+- The hover corridor above the main button is intentionally kept so users can move the pointer from the main button to the expanded icons without closing the menu immediately.
+
+## Portfolio Section
+
+Portfolio is JSON-driven.
+
+- Data file: `portfolio.json`
+- Categories: `ALL`, `SYSTEM`, `WEB`, `LOGO`, `PRINT`
+- Current dummy data: 15 projects distributed across categories
+- Cards are rendered dynamically from JSON.
+- Each card uses a square thumbnail.
+- Category and project title are displayed as white text over a 50% black mask layer.
+- On card hover/focus, the mask layer and text fade out.
+- Clicking a card opens a full-screen modal.
+- Modal supports multiple project images and thumbnail switching.
+- Detail image uses `object-fit: contain` so mixed image ratios are not cropped in the modal.
+
+### Portfolio Height Behavior
+
+The portfolio gallery height is calculated by JavaScript:
+
+- Uses the real card height, grid row gap, content-box inner height, and portfolio header height.
+- Shows only complete thumbnail rows.
+- If 3 full rows fit, the scroll area is set to 3 rows.
+- If 4 or more rows fit, the scroll area is capped at 4 rows.
+- The content-box height remains stable when switching categories, even if the selected category has fewer projects.
+
+## Editing Portfolio Data
+
+Add or edit projects in `portfolio.json`.
+
+Required fields:
+
+```json
+{
+  "id": "unique-project-id",
+  "category": "WEB",
+  "title": "Project Title",
+  "thumbnail": "img/portfolio/project/thumb.jpg",
+  "images": [
+    "img/portfolio/project/01.jpg",
+    "img/portfolio/project/02.jpg"
+  ],
+  "description": "Project description.",
+  "meta": ["Role", "Tool", "Output"]
+}
+```
+
+Rules:
+
+- Category values should match one of `SYSTEM`, `WEB`, `LOGO`, or `PRINT`.
+- `ALL` is generated by the UI and should not be used as a project category.
+- Keep image paths relative to the repository root.
+- Prefer `img/portfolio/project-name/...` for real portfolio assets.
+- Avoid `../img/...` paths.
+- Filename casing matters on GitHub Pages.
 
 ## Local Preview
 
-This is a static site. For a quick check, open `index.html` in a browser.
+Because the portfolio section loads `portfolio.json` with `fetch`, opening `index.html` directly may not fully represent the deployed behavior.
 
-For a server-based check, run this from the repository root:
+Use a local static server from the repository root when possible:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Then open `http://localhost:8000/`.
+Then open:
+
+```text
+http://127.0.0.1:8000/
+```
+
+If Python is unavailable, use any static server such as VS Code Live Server. The current Codex session previously used a temporary PowerShell `HttpListener` server on port `8000` for validation.
 
 ## Multi-PC Git Workflow
 
@@ -53,7 +147,7 @@ git pull --ff-only origin main
 After checking the page locally:
 
 ```powershell
-git add index.html img PROJECT_NOTES.md
+git add index.html portfolio.json img PROJECT_NOTES.md
 git commit -m "Describe the change"
 git push origin main
 ```
@@ -61,13 +155,16 @@ git push origin main
 Guidelines:
 
 - Do not begin new work with uncommitted changes from another task unless they are deliberate.
-- Use `git pull --ff-only` to avoid creating an accidental merge commit. If it fails, inspect `git status` and resolve the local work first.
-- Keep commits small and describe the visible change in Korean or English consistently.
+- Use `git pull --ff-only` to avoid accidental merge commits.
+- Keep commits small and describe visible changes clearly.
 - Before a risky HTML/CSS edit, use `git diff` to confirm only intended changes are staged.
+- Preserve UTF-8 encoding.
+- Do not commit personal editor settings. `.vscode/`, `Thumbs.db`, and `.DS_Store` are ignored.
 
 ## Deployment Check
 
 1. Push the intended commit to `origin/main`.
-2. Wait for the GitHub Pages deployment to finish.
-3. Reload the public page with cache bypass (`Ctrl+F5`) and verify images, navigation, desktop layout, and mobile layout.
-4. If an asset fails to load, first verify its filename casing and its `img/...` path in `index.html`.
+2. Wait for GitHub Pages deployment to finish.
+3. Reload the public page with cache bypass: `Ctrl+F5`.
+4. Verify section snapping, inner scrolling, profile links, floating contact shortcuts, portfolio tabs, portfolio modal, and image loading.
+5. If an asset fails to load, first verify filename casing and its relative path.
